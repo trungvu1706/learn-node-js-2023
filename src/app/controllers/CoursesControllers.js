@@ -29,6 +29,20 @@ class CoursesControllers {
     const data = await Course.findOne({ _id: req.params.id })
     return res.status(201).json(data)
   }
+
+  async destroy(req, res, next) {
+    await Course.delete({ _id: req.params.id })
+    return res.status(200).json('Delete successfully!')
+  }
+
+  async restore(req, res, next) {
+    await Course.restore({ _id: req.params.id })
+    return res.status(200).json('Restore successfully!')
+  }
+  async forceDestroy(req, res, next) {
+    await Course.deleteOne({ _id: req.params.id })
+    return res.status(200).json('Force delete successfully!')
+  }
 }
 
 module.exports = new CoursesControllers()
